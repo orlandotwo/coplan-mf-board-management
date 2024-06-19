@@ -1,0 +1,162 @@
+<div class="min-h-screen bg-fixed bg-center bg-cover min-w-screen bg-light-500 body">
+
+  <div class="fixed items-center justify-center w-full text-white">
+    <div class="flex items-center mx-auto mt-3 mb-3 rounded-full gap-x-4 lg:gap-x-6 bg-slate-300" style="width:520px">
+      <p class="ml-4 text-stone-900"><b>{{this.titleBoard}}</b></p>
+
+      <div class="w-96">
+        <div class="relative rounded-md">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+
+          </div>
+          <input type="text" name="iFind" id="iFind"
+            class="bg-slate-400 block w-full rounded-full border-0 py-1.5 pl-10 text-white placeholder:text-white placeholder focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            placeholder="Buscar...">
+        </div>
+      </div>
+
+      <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+        <span class="sr-only">View notifications</span>
+        <svg class="w-5 h-5 text-white stroke-2" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+        </svg>
+      </button>
+
+      <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+        <span class="sr-only">View notifications</span>
+        <svg class="w-5 h-5 text-white stroke-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+        </svg>
+      </button>
+
+      <!-- Profile dropdown -->
+      <div class="relative">
+        <button type="button" class="-m-1.5 flex items-center p-1.5" id="user-menu-button" aria-expanded="false"
+          aria-haspopup="true">
+          <span class="sr-only">Open user menu</span>
+          <img class="w-10 h-8 rounded-full bg-gray-50"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwa9iKF0g8-t5Kf8_JCp9tS6o8UGGDonVa1Q&s" alt="">
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <br />
+  <br />
+
+  @if(this.rotarListas){
+  <div class="grid grid-flow-row gap-2 auto-rows-max">
+    @for (list of this.listLista; track $index) {
+    <div class="bg-green-400 border border-green-500 rounded-lg shadow-lg max-w-max">
+      <div class="px-6 py-4">
+        <div class="mb-2 text-xl font-bold">{{list.nombre}}</div>
+        <!-- aqui debo de preguntar si tiene o no cards -->
+        @if(list.listCard){
+        <div class="grid grid-flow-col gap-2 auto-cols-max">
+          @for (card of list.listCard; track card) {
+          <app-card [titleCard]="card.nombre"></app-card>
+
+          <!-- <div class="max-w-sm gap-1 border border-red-500 rounded-lg shadow-lg">
+              <div class="px-6 py-4">
+                <div class="mb-2 text-xl font-bold">
+                  {{card.nombre}}
+                </div>
+                <p class="text-base text-gray-700">
+                  1 o mas cards
+                </p>
+              </div>
+            </div> -->
+          }
+        </div>
+        }
+        <!-- --------------------------------------- -->
+      </div>
+      <button (click)="addCard(list)" type="button"
+        class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M5 12h14m-7 7V5" />
+        </svg>
+
+        <span class="sr-only">Icon description</span>
+      </button>
+    </div>
+    }
+  </div>
+  }@else {
+  <div class="grid grid-flow-col gap-2 auto-cols-max">
+    @for (list of this.listLista; track $index) {
+    <div class="border rounded-lg shadow-lg border-secondary-300 white bg-secondary-50">
+      <div class="px-6 py-4">
+        <div class="mb-2 text-xl font-bold">{{list.nombre}}</div>
+        <!-- aqui debo de preguntar si tiene o no cards -->
+        @if(list.listCard){
+          <div class="grid grid-flow-row gap-2 auto-rows-max">
+
+            @for (card of list.listCard; track $index) {
+            <app-card [titleCard]="card.nombre" [colorCard]="card.color"></app-card>
+            }
+
+          </div>
+        }
+        <!-- ------------------------------------------ -->
+      </div>
+
+      <button (click)="addCard(list)" type="button"
+        class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M5 12h14m-7 7V5" />
+        </svg>
+        <span class="sr-only">Icon description</span>
+
+      </button>
+
+
+    </div>
+    }
+  </div>
+  }
+
+  <button class="fixed bottom-4 left-4 btn-custom" (click)="rotar()">
+    <svg class="text-black transition-transform duration-300 transform w-7 h-7 dark:text-white hover:rotate-180"
+      aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" viewBox="0 0 24 24">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4" />
+    </svg>
+  </button>
+
+  <button class="fixed transform bottom-4 right-4 hover:scale-105 btn-custom" (click)="setOpenModal(true)">
+    <svg class="text-black w-7 h-7 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+      height="24" fill="none" viewBox="0 0 24 24">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5" />
+    </svg>
+  </button>
+
+  @if(this.openModal){
+  <app-modal-add-list (closeModal)="setOpenModal($event.accion, $event.state)"></app-modal-add-list>
+  }
+</div>
+<!-- <div  class="absolute left-0 px-2 py-2 mt-2 origin-top-left bg-white border border-gray-500 rounded-md shadow-lg w-45 ring-1 ring-black ring-opacity-5">
+  <div class="relative h-11 w-full min-w-[200px]">
+    <input
+      class="w-full h-full px-3 py-3 font-sans text-sm font-normal transition-all bg-transparent border rounded-md peer border-blue-gray-200 text-blue-gray-700 outline outline-0 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+      placeHolder=" "
+    />
+    <label class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-pink-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+      Name
+    </label>
+  </div>
+</div> -->
