@@ -22,3 +22,4 @@
 .btn-primary{
   @apply hover:bg-blue-700 text-white font-bold py-4 px-4 rounded-full shadow-lg
 }
+
