@@ -44,6 +44,21 @@ export class ModalUpdateListComponent implements OnInit {
     }
   }
   updateList(){
+    const auxData = {
+      id: this.data.id,
+      nombre: this.formList.value.nombre
+    }
+
+    this.httpService.putList(auxData).then(response => {
+      if (response) {
+        this.cerrarModal(false);
+        this.reload.emit(true);
+      } else {
+        alert('Error al Modificar la lista');
+      }
+    }).catch(error => {
+      alert('Error al Modificar la lista');
+    });
   }
   cerrarModal(state: boolean = false){
     console.log('cerrarModal -> ', state);

@@ -35,11 +35,11 @@ export class BoardManagementService {
   putList(data:any): Promise<boolean> {
     return this.http.put('http://localhost:8081/coplan-api/list', data).toPromise()
       .then(response => {
-        console.log('Card Actualizada:', response);
+        console.log('List Actualizada:', response);
         return true;
       })
       .catch(error => {
-        console.error('Error al Actualizar la Card:', error);
+        console.error('Error al Actualizar List:', error);
         return false;
       });
   }
