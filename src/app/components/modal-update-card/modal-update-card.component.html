@@ -1,30 +1,126 @@
 <div class="flex justify-center items-center ">
   <!-- Modal Overlay -->
   <div  class="fixed inset-0 px-2 z-10 overflow-hidden flex items-center justify-center">
-    <div  x-transition:enter="transition-opacity ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+    <!-- <div  x-transition:enter="transition-opacity ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div> -->
+    <div   class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
     <!-- Modal Content -->
-    <div  x-transition:enter="transition-transform ease-out duration-300" x-transition:enter-start="transform scale-75" x-transition:enter-end="transform scale-100" x-transition:leave="transition-transform ease-in duration-300" x-transition:leave-start="transform scale-100" x-transition:leave-end="transform scale-75" class="bg-white rounded-md shadow-xl overflow-hidden max-w-md w-full sm:w-96 md:w-1/2 lg:w-2/3 xl:w-1/3 z-50">
+     <!-- <div  x-transition:enter="transition-transform ease-out duration-300" x-transition:enter-start="transform scale-75" x-transition:enter-end="transform scale-100" x-transition:leave="transition-transform ease-in duration-300" x-transition:leave-start="transform scale-100" x-transition:leave-end="transform scale-75" class="bg-white rounded-md shadow-xl overflow-hidden max-w-md w-full sm:w-96 md:w-1/2 lg:w-2/3 xl:w-1/3 z-50" > -->
+    <div  [formGroup] ="formCard" class="bg-white rounded-md shadow-xl overflow-hidden max-w-md w-full sm:w-96 md:w-1/2 lg:w-2/3 xl:w-1/3 z-50" >
       <!-- Modal Header -->
       <div class="bg-primary-300 text-white px-4 py-2 flex justify-between">
-        <h2 class="text-lg font-semibold">Agregar Lista</h2>
+        <h2 class="text-lg font-semibold">Actualizar Card</h2>
+
+        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M6 14h2m3 0h5M3 7v10a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1Z"/>
+        </svg>
+
       </div>
       <!-- Modal Body -->
-      <div class="w-full max-w-sm mx-auto m-2">
-        <label for="nomLista">Nombre de nueva lista</label>
-        <input type="text" class="w-full border rounded-xl overflow-hidden resize-none focus:primary-300 ring-1 ring-transparent focus:ring-primary-300 focus:outline-none text-black p-2 transition ease-in-out duration-300" name="nomLista" id="nomLista" [(ngModel)]="listName"/>
+      <div class="w-full max-w-sm mx-auto m-2" >
+        <label class="flex items-center text-gray-700">
+          <span class="mr-2">Nombre: </span>
+          <span [class.hidden]="ocultarCampo.nombre">{{ formCard.get('nombre')!.value }}</span>
+            @if(ocultarCampo.nombre){
+              <input type="text" class="input-primary"  formControlName="nombre"/>
+            }
+          <button type="button" class="ml-2 text-gray-500 hover:text-gray-700"  (click)="ocultarCampo.nombre= !ocultarCampo.nombre">
+            <svg class="w-6 h-6 text-gray-800 dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
+            </svg>
+          </button>
+        </label>
       </div>
 
-      <div class="w-full max-w-sm mx-auto">
-        <textarea class="h-24 w-full border rounded-xl overflow-hidden resize-none focus:primary-300 ring-1 ring-transparent focus:ring-primary-300 focus:outline-none text-black p-2 transition ease-in-out duration-300" placeholder="Escriba aqui descripcion . . ."></textarea>
-        <!-- <div class="flex justify-end">
-          <button class="rounded-full py-1 px-2 text-white bg-black">Comment</button>
-        </div> -->
+      <div class="w-full max-w-sm mx-auto m-2">
+        <label class="flex items-center text-gray-700">
+          <span class="mr-2">Prioridad: </span>
+          <span [class.hidden]="ocultarCampo.prioridad">{{ formCard.get('prioridad')!.value }}</span>
+            @if(ocultarCampo.prioridad){
+              <input type="text" class="input-primary" name="nomLista" id="nomLista" formControlName="prioridad" />
+            }
+          <button type="button" class="ml-2 text-gray-500 hover:text-gray-700" (click)="ocultarCampo.prioridad = !ocultarCampo.prioridad">
+            <svg class="w-6 h-6 text-gray-800 dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
+            </svg>
+          </button>
+        </label>
       </div>
+
+
+      <div class="w-full max-w-sm mx-auto m-2">
+        <label class="flex items-center text-gray-700">
+          <span class="mr-2">Descripcion: </span>
+          <span [class.hidden]="ocultarCampo.descripcion">{{ formCard.get('descripcion')?.value }}</span>
+          @if(ocultarCampo.descripcion){
+            <textarea class="h-24 w-full border rounded-xl overflow-hidden resize-none focus:primary-300 ring-1 ring-transparent focus:ring-primary-300 focus:outline-none text-black p-2 transition ease-in-out duration-300"
+              placeholder="Escriba aqui descripcion . . ."
+              formControlName="descripcion" ></textarea>
+            <!-- <input type="text" class="w-full border rounded-xl overflow-hidden resize-none focus:primary-300 ring-1 ring-transparent focus:ring-primary-300 focus:outline-none text-black p-2 transition ease-in-out duration-300" name="nomLista" id="nomLista" [(ngModel)]="label"/> -->
+          }
+          <button type="button" class="ml-2 text-gray-800 hover:text-gray-700" (click)="ocultarCampo.descripcion= !ocultarCampo.descripcion">
+            <svg class="w-6 h-6 text-gray-800 dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
+            </svg>
+          </button>
+        </label>
+      </div>
+
+            <!--
+      <div class="w-full max-w-sm mx-auto m-2">
+        <label for="nomLista">Nombre</label>
+        <input type="text" class="w-full border rounded-xl overflow-hidden resize-none focus:primary-300 ring-1 ring-transparent focus:ring-primary-300 focus:outline-none text-black p-2 transition ease-in-out duration-300" name="nomLista" id="nomLista" [(ngModel)]="listName"/>
+      </div>
+      -->
+
+      <!-- <div class="w-full max-w-sm mx-auto">
+        <textarea class="h-24 w-full border rounded-xl overflow-hidden resize-none focus:primary-300 ring-1 ring-transparent focus:ring-primary-300 focus:outline-none text-black p-2 transition ease-in-out duration-300" placeholder="Escriba aqui descripcion . . ."></textarea>
+      </div> -->
+
       <!-- Modal Footer -->
-      <div class="border-t px-4 py-2 flex justify-end">
-        <button class="px-3 py-1 mr-1 bg-primary-300 text-white  rounded-md w-full sm:w-auto" (click)="cerrarModal(false)"> Cancelar </button>
-        <button class="px-3 py-1 bg-primary-300 text-white  rounded-md w-full sm:w-auto"   (click)="updateCard(listName)" > Accept </button>
+      <div class="border-t px-4 py-2 flex justify-end items-baseline">
+        <div class="flex items-center">
+          <button type="button" class="ml-0 text-gray-500 hover:text-gray-700 hover:scale-125" (click)="deleteCard()">
+            <svg class="w-6 h-6 text-gray-800 dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="flex items-center ml-auto">
+          <button class="btn-primary mr-2" (click)="cerrarModal(false)"> Cancelar </button>
+          <button class="btn-primary"   (click)="updateCard()" > Accept </button>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<!--
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">Iniciar Sesión</h2>
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 mb-2">Correo Electrónico</label>
+        <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded" ngModel required>
+      </div>
+      <div class="mb-6">
+        <label for="password" class="block text-gray-700 mb-2">Contraseña</label>
+        <input type="password" id="password" name="password" class="w-full px-3 py-2 border border-gray-300 rounded" ngModel required>
+      </div>
+      <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600" [disabled]="!loginForm.valid">Ingresar</button>
+    </form>
+  </div>
+</div>
+
+<div class="flex items-center">
+  <label class="flex items-center text-gray-700">
+    <span [class.hidden]="isEditing">{{ label }}</span>
+    <input *ngIf="isEditing" type="text" [(ngModel)]="label" class="w-full px-2 py-1 border border-gray-300 rounded" (blur)="stopEditing()">
+    <button type="button" class="ml-2 text-gray-500 hover:text-gray-700" (click)="editLabel()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M17.414 2.586a2 2 0 0 0-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 0 0 0-2.828zM4 14v3h3l8.293-8.293-3-3L4 14z"/>
+      </svg>
+    </button>
+  </label>
+</div>
+-->

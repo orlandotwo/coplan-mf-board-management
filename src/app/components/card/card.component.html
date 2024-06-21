@@ -1,4 +1,4 @@
-<div class="w-full duration-500 sm:w-1/4 lg:w-auto hover:scale-105  cursor-pointer" (click)="modificarPrioridad()">
+<div class="w-full duration-500 sm:w-1/4 lg:w-auto hover:scale-105  cursor-pointer" (click)="updateCard()">
   <div class="flex items-center justify-between p-4 bg-white rounded-lg shadow-md shadow-gray-500">
     <div>
       <h2 class="pr-2 text-sm font-bold text-gray-900">{{titleCard}}</h2>
@@ -7,9 +7,9 @@
       <!-- <button class="px-4 py-2 mt-6 text-sm tracking-wider text-white bg-yellow-400 rounded-lg outline-none hover:bg-yellow-300">Add to cart</button> -->
     </div>
     <div
-      [ngClass]="{'from-warning-500 to-warning-400 shadow-warning-400': colorCard === 'yellow',
-      'from-success-500 to-success-500 shadow-success-400': colorCard === 'green',
-      'from-danger-500 to-danger-400 danger-red-400': colorCard === 'red'}"
+      [ngClass]="{'from-warning-500 to-warning-400 shadow-warning-400': prioridad === 'Media',
+      'from-success-500 to-success-500 shadow-success-400': prioridad === 'Baja',
+      'from-danger-500 to-danger-400 danger-red-400': prioridad === 'Alta'}"
       class="flex items-center justify-center w-12 h-12 border-2 border-white border-dashed rounded-full shadow-2xl bg-gradient-to-tr">
       <!-- class="flex items-center justify-center w-16 h-16 border-2 border-white border-dashed rounded-full shadow-2xl bg-gradient-to-tr from-yellow-500 to-yellow-400 shadow-yellow-400 "> -->
 
@@ -22,7 +22,7 @@
 </div>
 
 @if(this.openModal){
-  <app-modal-update-card (closeModal)="this.openModal = $event"></app-modal-update-card>
+  <app-modal-update-card (closeModal)="this.openModal = $event" [data]="this.searchInfo"></app-modal-update-card>
 }
 <!--
   <div class="max-w-sm gap-1 border border-red-500 rounded-lg shadow-lg">

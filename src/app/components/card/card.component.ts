@@ -13,25 +13,18 @@ import { ModalUpdateCardComponent } from '../modal-update-card/modal-update-card
 })
 export class CardComponent {
   @Input() titleCard: string = '';
-  @Input() colorCard: string = '';
   @Input() searchInfo: any = { };
 
   prioridad = '';
   openModal = false;
 
   ngOnInit(): void {
-    const prioridadMap: any = {
-      yellow: 'Media',
-      green: 'Baja',
-      red: 'Alta',
-    };
-    this.prioridad = prioridadMap[this.colorCard] || 'Baja';
 
-    // console.log('color card:', this.colorCard);
-    // console.log('title card:', this.titleCard);
+    this.prioridad = this.searchInfo.card.prioridad;
+
   }
 
-  modificarPrioridad(){
+  updateCard(){
     this.searchInfo
     this.openModal = true;
     console.log('searchInfo -> ',this.searchInfo);

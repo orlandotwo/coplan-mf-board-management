@@ -3,13 +3,15 @@ import { CardComponent } from '../components/card/card.component';
 import { BoardManagementService } from '../services/board-management.service';
 import { ListModel } from '../models/list';
 import { ModalAddListComponent } from '../components/modal-add-list/modal-add-list.component';
+import { ModalUpdateListComponent } from '../components/modal-update-list/modal-update-list.component';
 
 @Component({
   selector: 'app-board-management',
   standalone: true,
   imports: [
     CardComponent,
-    ModalAddListComponent
+    ModalAddListComponent,
+    ModalUpdateListComponent
   ],
   templateUrl: './board-management.component.html'
 })
@@ -19,7 +21,10 @@ export class BoardManagementComponent {
   listLista:ListModel[] = [];
   rotarListas:boolean = false;
   openModal:boolean = false;
-  openMenu:boolean = false;
+  //openMenu:boolean = false;
+  openModalConfigList: boolean = false;
+  listToDelete: any = {};
+
 
   constructor(private httpService: BoardManagementService) {
     this.getList()
@@ -64,4 +69,9 @@ export class BoardManagementComponent {
       alert('Error al cargar las listas');
     });
   }
+  openModalUpdateList(list:any){
+    this.listToDelete = list;
+    this.openModalConfigList = true
+  }
+
 }

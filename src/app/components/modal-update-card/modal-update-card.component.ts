@@ -1,24 +1,66 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BoardManagementService } from '../../services/board-management.service';
 
 @Component({
   selector: 'app-modal-update-card',
   standalone: true,
-  imports: [FormsModule],
+  imports: [
+    ReactiveFormsModule,
+    FormsModule
+  ],
   templateUrl: './modal-update-card.component.html'
 })
-export class ModalUpdateCardComponent {
+export class ModalUpdateCardComponent implements OnInit {
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() data: any = {};
 
-  openModal:any;
-  listTitle = '';
-  listName = '';
+  formCard: FormGroup = new FormGroup({});
 
-  constructor(private httpService: BoardManagementService){  }
+  ocultarCampo= {
+    nombre: false,
+    prioridad: false,
+    descripcion: false
+  }
+
+  constructor(
+    private httpService: BoardManagementService,
+    private _fb: FormBuilder){  }
+    //private cdr: ChangeDetectorRef
+
+  ngOnInit(): void {
+
+    if(this.data.card.descripcion === undefined || this.data.card.descripcion === ''){
+      console.log('this.data.card.descipcion');
+      this.data.card.descripcion = ''
+      this.ocultarCampo.descripcion = true;
+    }
+    this.formCard = this._fb.group({
+      'nombre':    [String(this.data.card.nombre)],
+      'prioridad': [String(this.data.card.prioridad)],
+      'descripcion': [String(this.data.card.descripcion)]
+    })
+  }
+
+  // editar(){
+  //   this.isEditing = true;
+  //   this.cdr.detectChanges();
+  // }
+
+  // stopEditing() {
+  //   this.isEditing = false;
+  // }
 
 
-  updateCard(nombre:string){
+  updateCard(){
+    console.log(this.formCard)
+
+    this.data.card.nombre = this.formCard.get('nombre')?.value;
+    this.data.card.prioridad = this.formCard.get('prioridad')?.value;
+    this.data.card.descripcion = this.formCard.get('descripcion')?.value;
+
+    console.log(this.data);
+
 
     // if (nombre.trim() === '') {
     //   //console.log('error')
@@ -36,19 +78,44 @@ export class ModalUpdateCardComponent {
     //   nombre: nombre
     // }
 
-    // this.httpService.postList(mewList).then(response => {
-    //   if (response) {
-    //     this.setOpenModal(false, true);
-    //   } else {
-    //     alert('Error al agregar la lista');
-    //   }
-    // }).catch(error => {
-    //   alert('Error al agregar la lista');
-    // });
+    this.httpService.putCard(this.data).then(response => {
+      if (response) {
+        this.cerrarModal(false);
+      } else {
+        alert('Error al agregar la lista');
+      }
+    }).catch(error => {
+      alert('Error al agregar la lista');
+    });
+
+  }
+
+  deleteCard(){
+    let confirmDelete = window.confirm('¿Seguro que desea eliminar?');
+    if (confirmDelete) {
+
+      const auxIdList = this.data.idList;
+      const auxIdCard = this.data.card.id;
+
+
+      console.log('Card a eliminar', auxIdList, ' - ' ,auxIdCard);
+      this.httpService.deleteCard(auxIdList, auxIdCard).then(response => {
+        if (response) {
+          this.cerrarModal(false);
+        } else {
+          alert('Error al Eliminar Card');
+        }
+      }).catch(error => {
+        alert('Error al Eliminar Card');
+      });
+    }
 
   }
 
   cerrarModal(state: boolean = false){
+    console.log('cerrarModal -> ', state);
     this.closeModal.emit(state);
   }
+
+
 }
