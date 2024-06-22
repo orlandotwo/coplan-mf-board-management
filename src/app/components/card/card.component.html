@@ -7,9 +7,11 @@
       <!-- <button class="px-4 py-2 mt-6 text-sm tracking-wider text-white bg-yellow-400 rounded-lg outline-none hover:bg-yellow-300">Add to cart</button> -->
     </div>
     <div
-      [ngClass]="{'from-warning-500 to-warning-400 shadow-warning-400': prioridad === 'Media',
-      'from-success-500 to-success-500 shadow-success-400': prioridad === 'Baja',
-      'from-danger-500 to-danger-400 danger-red-400': prioridad === 'Alta'}"
+      [ngClass]="{
+        'from-warning-500 to-warning-400 shadow-warning-400': prioridad === 'Media',
+        'from-success-500 to-success-500 shadow-success-400': prioridad === 'Baja',
+        'from-danger-500 to-danger-400 danger-red-400': prioridad === 'Alta'
+      }"
       class="flex items-center justify-center w-12 h-12 border-2 border-white border-dashed rounded-full shadow-2xl bg-gradient-to-tr">
       <!-- class="flex items-center justify-center w-16 h-16 border-2 border-white border-dashed rounded-full shadow-2xl bg-gradient-to-tr from-yellow-500 to-yellow-400 shadow-yellow-400 "> -->
 

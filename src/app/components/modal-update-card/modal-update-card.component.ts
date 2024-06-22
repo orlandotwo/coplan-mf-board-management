@@ -1,13 +1,15 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BoardManagementService } from '../../services/board-management.service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-modal-update-card',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgClass
   ],
   templateUrl: './modal-update-card.component.html'
 })
@@ -30,15 +32,15 @@ export class ModalUpdateCardComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(this.data.card.descripcion === undefined || this.data.card.descripcion === ''){
-      console.log('this.data.card.descipcion');
-      this.data.card.descripcion = ''
-      this.ocultarCampo.descripcion = true;
-    }
+    //if(this.data.card.descripcion === undefined || this.data.card.descripcion === ''){
+    //   console.log('this.data.card.descipcion');
+    //   this.data.card.descripcion = ''
+    //   this.ocultarCampo.descripcion = true;
+    // }
     this.formCard = this._fb.group({
       'nombre':    [String(this.data.card.nombre)],
       'prioridad': [String(this.data.card.prioridad)],
-      'descripcion': [String(this.data.card.descripcion)]
+      'descripcion': this.data.card.descripcion === undefined ? '' : [String(this.data.card.descripcion)]
     })
   }
 

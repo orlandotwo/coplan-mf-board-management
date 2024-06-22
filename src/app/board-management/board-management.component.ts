@@ -19,11 +19,13 @@ export class BoardManagementComponent {
   @Input() titleBoard: string = '';
 
   listLista:ListModel[] = [];
+  listaListaBusqueda:ListModel[] = [];
   rotarListas:boolean = false;
   openModal:boolean = false;
   //openMenu:boolean = false;
   openModalConfigList: boolean = false;
   listToDelete: any = {};
+  search:string = '';
 
 
   constructor(private httpService: BoardManagementService) {
@@ -74,4 +76,28 @@ export class BoardManagementComponent {
     this.openModalConfigList = true
   }
 
+  onSearch(event: any): void {
+    console.log(event);
+    this.search = event.target.value;
+    if(this.search.length > 0){
+      console.log('con info',this.search)
+      const busqueda = this.listLista.filter(list => list.nombre.toLowerCase().includes(this.search.toLowerCase()));
+      this.listaListaBusqueda = busqueda;
+    }else{
+      console.log('sin info')
+      this.getList()
+    }
+    // const query = event.target.value;
+    // if (query.length > 0) {
+    //   this.cardService.searchLists(query).then(
+    //     lists => {
+    //       this.searchResults = lists;
+    //     }
+    //   ).catch(error => {
+    //     console.error('Error al buscar las listas:', error);
+    //   });
+    // } else {
+    //   this.searchResults = []; // Limpiar los resultados si no hay query
+    // }
+  }
 }

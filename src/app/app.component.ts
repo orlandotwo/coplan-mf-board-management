@@ -5,6 +5,7 @@ import { BoardManagementService } from './services/board-management.service';
 import { ModalAddListComponent } from './components/modal-add-list/modal-add-list.component';
 import { ListModel } from './models/list';
 import { BoardManagementComponent } from './board-management/board-management.component';
+import { ListCardPrincipalComponent } from './components/list-card-principal/list-card-principal.component';
 
 interface CardPrincipal{
   id: number;
@@ -22,7 +23,8 @@ interface Lista{
   standalone: true,
   imports: [
     RouterOutlet,
-    BoardManagementComponent
+    BoardManagementComponent,
+    ListCardPrincipalComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
