@@ -11,7 +11,7 @@
       <!-- Modal Body -->
       <div class="w-full max-w-sm mx-auto m-2">
         <label for="nomLista">Nombre de nueva lista</label>
-        <input type="text" class="input-primary" name="nomLista" id="nomLista" [(ngModel)]="listName"/>
+        <input type="text" class="input-primary" name="nomLista" id="nomLista" [(ngModel)]="listName" (keydown.enter)="addList(listName)"/>
       </div>
       <!-- Modal Footer -->
       <div class="border-t px-4 py-2 flex justify-end">

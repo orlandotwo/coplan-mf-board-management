@@ -13,10 +13,10 @@ export class BoardManagementService {
   getLists(): Promise<ListModel[]> {
     return this.http.get<ListModel[]>('http://localhost:8081/coplan-api/list').toPromise()
       .then(response => {
-        console.log('Listas:', response);
+        //console.log('Listas:', response);
         return response as ListModel[];
       }).catch(error => {
-        console.error('Error al obtener las listas:', error);
+        //console.error('Error al obtener las listas:', error);
         return Promise.reject(error);
       });
   }
@@ -24,33 +24,33 @@ export class BoardManagementService {
   postList(list: ListModel): Promise<boolean> {
     return this.http.post('http://localhost:8081/coplan-api/list', list).toPromise()
       .then(response => {
-        console.log('Lista agregada:', response);
+        //console.log('Lista agregada:', response);
         return true;
       })
       .catch(error => {
-        console.error('Error al agregar la lista:', error);
+        //console.error('Error al agregar la lista:', error);
         return false;
       });
   }
   putList(data:any): Promise<boolean> {
     return this.http.put('http://localhost:8081/coplan-api/list', data).toPromise()
       .then(response => {
-        console.log('List Actualizada:', response);
+        //console.log('List Actualizada:', response);
         return true;
       })
       .catch(error => {
-        console.error('Error al Actualizar List:', error);
+        //console.error('Error al Actualizar List:', error);
         return false;
       });
   }
   deleteList(idList: number): Promise<boolean> {
     return this.http.delete(`http://localhost:8081/coplan-api/list/${idList}`).toPromise()
       .then(response => {
-        console.log('Card Eliminada:', response);
+        //console.log('Card Eliminada:', response);
         return true;
       })
       .catch(error => {
-        console.error('Error al Eliminar la Card:', error);
+        //console.error('Error al Eliminar la Card:', error);
         return false;
       });
   }
@@ -59,18 +59,18 @@ export class BoardManagementService {
   postCard(idList:number, nomCard?:string): Promise<boolean> {
 
     // this.http.post('http://localhost:8081/coplan-api/setList', list).subscribe(response => {
-    //   console.log('Lista agregada:', response);
+    //   //console.log('Lista agregada:', response);
     // });
     const newCard = {
       idLista: idList
     }
     return this.http.post('http://localhost:8081/coplan-api/card', newCard).toPromise()
       .then(response => {
-        console.log('Card agregada:', response);
+        //console.log('Card agregada:', response);
         return true;
       })
       .catch(error => {
-        console.error('Error al agregar la Card:', error);
+        //console.error('Error al agregar la Card:', error);
         return false;
       });
   }
@@ -78,15 +78,15 @@ export class BoardManagementService {
   putCard(data:any): Promise<boolean> {
 
     // this.http.post('http://localhost:8081/coplan-api/setList', list).subscribe(response => {
-    //   console.log('Lista agregada:', response);
+    //   //console.log('Lista agregada:', response);
     // });
     return this.http.put('http://localhost:8081/coplan-api/card', data).toPromise()
       .then(response => {
-        console.log('Card Actualizada:', response);
+        //console.log('Card Actualizada:', response);
         return true;
       })
       .catch(error => {
-        console.error('Error al Actualizar la Card:', error);
+        //console.error('Error al Actualizar la Card:', error);
         return false;
       });
   }
@@ -96,11 +96,11 @@ export class BoardManagementService {
 
     return this.http.delete(`http://localhost:8081/coplan-api/card/${idList}/${idCard}`).toPromise()
       .then(response => {
-        console.log('Card Eliminada:', response);
+        //console.log('Card Eliminada:', response);
         return true;
       })
       .catch(error => {
-        console.error('Error al Eliminar la Card:', error);
+        //console.error('Error al Eliminar la Card:', error);
         return false;
       });
   }
