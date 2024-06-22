@@ -23,8 +23,8 @@ export class CardComponent {
     this.prioridad = this.searchInfo.card.prioridad;
   }
   llega(lala:boolean){
-    console.log('llega', lala);
-    this.reload.emit(lala);
+    window.location.reload();
+    // this.reload.emit(lala);
   }
   // updateCard(){
   //   this.searchInfo
