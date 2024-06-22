@@ -91,7 +91,7 @@ export class ModalUpdateCardComponent implements OnInit {
       this.httpService.deleteCard(auxIdList, auxIdCard).then(response => {
         if (response) {
           this.cerrarModal(false);
-
+          this.reload.emit(true);
         } else {
           alert('Error al Eliminar Card');
         }
