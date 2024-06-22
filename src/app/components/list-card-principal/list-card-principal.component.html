@@ -17,7 +17,7 @@
             </div>
           </div>
           @for (card of list.listCard; track $index) {
-            <app-card [titleCard]="card.nombre" [searchInfo]="{idList: list.id, card}"></app-card>
+            <app-card [titleCard]="card.nombre" [searchInfo]="{idList: list.id, card}" (reload)="$event? this.getList():''"></app-card>
           }
           <div class="border-t  py-2 flex justify-end items-baseline">
             <button (click)="addCard(list)" type="button"
@@ -65,7 +65,7 @@
 
             @if(list.listCard){
               @for (card of list.listCard; track $index) {
-                <app-card [titleCard]="card.nombre" [searchInfo]="{idList: list.id, card}"></app-card>
+                <app-card [titleCard]="card.nombre" [searchInfo]="{idList: list.id, card}" (reload)="$event? this.getList() : ''"></app-card>
               }
             }
 

@@ -43,10 +43,12 @@ export class ListCardPrincipalComponent implements OnChanges{
     }
   }
   getList(){
+    //this.ngOnChanges({} as SimpleChanges);
     this.httpService.getLists().then(response => {
       if (response) {
         this.listLista = response as ListModel[];
         console.log('Listas:', response);
+
       } else {
         alert('Error al cargar las listas');
       }

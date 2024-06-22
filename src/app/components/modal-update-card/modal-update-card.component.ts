@@ -15,6 +15,7 @@ import { NgClass } from '@angular/common';
 })
 export class ModalUpdateCardComponent implements OnInit {
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() reload: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() data: any = {};
 
   formCard: FormGroup = new FormGroup({});
@@ -63,26 +64,12 @@ export class ModalUpdateCardComponent implements OnInit {
 
     console.log(this.data);
 
-
-    // if (nombre.trim() === '') {
-    //   //console.log('error')
-    //   alert('El nombre de la lista no puede estar vacio');
-    //   return;
-    // }
-
-    // if (/[^\w\s]/.test(nombre)) {
-    //   //console.log('error con simbolos raros')
-    //   alert('Oiga! El nombre de la lista no puede tener simbolos raros');
-    //   return;
-    // }
-
-    // const mewList: ListModel = {
-    //   nombre: nombre
-    // }
-
     this.httpService.putCard(this.data).then(response => {
       if (response) {
         this.cerrarModal(false);
+        this.reload.emit(true);
+        console.log('Card Actualizada:', response);
+
       } else {
         alert('Error al agregar la lista');
       }
@@ -104,6 +91,7 @@ export class ModalUpdateCardComponent implements OnInit {
       this.httpService.deleteCard(auxIdList, auxIdCard).then(response => {
         if (response) {
           this.cerrarModal(false);
+
         } else {
           alert('Error al Eliminar Card');
         }

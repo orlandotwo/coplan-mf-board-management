@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ModalUpdateCardComponent } from '../modal-update-card/modal-update-card.component';
 
 @Component({
@@ -14,22 +14,25 @@ import { ModalUpdateCardComponent } from '../modal-update-card/modal-update-card
 export class CardComponent {
   @Input() titleCard: string = '';
   @Input() searchInfo: any = { };
+  @Output() reload: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   prioridad = '';
   openModal = false;
 
   ngOnInit(): void {
-
     this.prioridad = this.searchInfo.card.prioridad;
-
   }
-
-  updateCard(){
-    this.searchInfo
-    this.openModal = true;
-    console.log('searchInfo -> ',this.searchInfo);
+  llega(lala:boolean){
+    console.log('llega', lala);
+    this.reload.emit(lala);
   }
-  closeModal(accion:boolean){
-    console.log('closeModal -> ', accion);
-  }
+  // updateCard(){
+  //   this.searchInfo
+  //   this.openModal = true;
+  //   console.log('searchInfo -> ',this.searchInfo);
+  // }
+  // closeModal(accion:boolean){
+  //   console.log('closeModal -> ', accion);
+  //   this.reload.emit(accion);
+  // }
 }
