@@ -76,6 +76,8 @@ export class ListCardPrincipalComponent implements OnChanges{
 
     if(list.listCard){
       console.log('Existe listCard')
+      let auxId = Math.max.apply(Math, list.listCard.map(card => card.id)) + 1;
+      list.listCard.push({id: auxId, nombre: '', prioridad: 'Baja', inicial: true});
     }else{
       console.log('No existe listCard')
       const card:CardModel = {
@@ -93,17 +95,6 @@ export class ListCardPrincipalComponent implements OnChanges{
         return l
       })
     }
-
-    // this.httpService.postCard(Number(list.id)).then(response => {
-    //   if (response) {
-    //     console.log('Listas:', response);
-    //     this.getList()
-    //   } else {
-    //     alert('Error al cargar las listas');
-    //   }
-    // }).catch(error => {
-    //   alert('Error al cargar las listas');
-    // });
   }
   openModalUpdateList(list:any){
     this.listToDelete = list;
