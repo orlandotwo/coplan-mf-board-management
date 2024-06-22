@@ -4,4 +4,5 @@ export interface CardModel{
   usuarios?: string[];
   prioridad: string;
   descripcion?: string;
+  inicial?: boolean;
 }

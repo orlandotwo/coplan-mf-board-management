@@ -1,30 +1,43 @@
-<div class="w-full duration-500  hover:scale-105  cursor-pointer" (click)="this.openModal = true">
-  <div class="flex items-center justify-between p-4 bg-white rounded-lg shadow-md shadow-gray-500">
-    <div>
-      <h2 class="pr-2 text-sm font-bold text-gray-900">{{titleCard}}</h2>
-      <!-- <h3 class="mt-2 text-xl font-bold text-left text-yellow-500">+ 150.000 ₭</h3>
-      <p class="text-sm font-semibold text-gray-400">Last Transaction</p> -->
-      <!-- <button class="px-4 py-2 mt-6 text-sm tracking-wider text-white bg-yellow-400 rounded-lg outline-none hover:bg-yellow-300">Add to cart</button> -->
-    </div>
-    <div
-      [ngClass]="{
-        'from-warning-500 to-warning-400 shadow-warning-400': prioridad === 'Media',
-        'from-success-500 to-success-500 shadow-success-400': prioridad === 'Baja',
-        'from-danger-500 to-danger-400 danger-red-400': prioridad === 'Alta'
-      }"
-      class="flex items-center justify-center w-12 h-12 border-2 border-white border-dashed rounded-full shadow-2xl bg-gradient-to-tr">
-      <!-- class="flex items-center justify-center w-16 h-16 border-2 border-white border-dashed rounded-full shadow-2xl bg-gradient-to-tr from-yellow-500 to-yellow-400 shadow-yellow-400 "> -->
-
+@if(this.searchInfo.card.inicial){
+  <div class="w-full duration-500  hover:scale-105  cursor-pointer">
+    <div class="flex items-center justify-between p-4 bg-white rounded-lg shadow-md shadow-gray-500">
       <div>
-        <h1 class="text-white text-x1">{{prioridad}}</h1>
+        <input type="text" class="input-primary" placeholder="Ingrese Nombre..." [(ngModel)]="this.searchInfo.card.nombre" (keydown.enter)="this.createCard()" (keydown.escape)="this.deleteInitialCard()" />
       </div>
-
     </div>
   </div>
-</div>
+}@else{
+  <div class="w-full duration-500  hover:scale-105  cursor-pointer" (click)="this.openModal = true">
+    <div class="flex items-center justify-between p-4 bg-white rounded-lg shadow-md shadow-gray-500">
+      <div>
+        <h2 class="pr-2 text-sm font-bold text-gray-900">{{this.searchInfo.card.nombre}}</h2>
+        <!-- <h3 class="mt-2 text-xl font-bold text-left text-yellow-500">+ 150.000 ₭</h3>
+        <p class="text-sm font-semibold text-gray-400">Last Transaction</p> -->
+        <!-- <button class="px-4 py-2 mt-6 text-sm tracking-wider text-white bg-yellow-400 rounded-lg outline-none hover:bg-yellow-300">Add to cart</button> -->
+      </div>
+      <div
+        [ngClass]="{
+          'from-warning-500 to-warning-400 shadow-warning-400': prioridad === 'Media',
+          'from-success-500 to-success-500 shadow-success-400': prioridad === 'Baja',
+          'from-danger-500 to-danger-400 danger-red-400': prioridad === 'Alta'
+        }"
+        class="flex items-center justify-center w-12 h-12 border-2 border-white border-dashed rounded-full shadow-2xl bg-gradient-to-tr">
+        <!-- class="flex items-center justify-center w-16 h-16 border-2 border-white border-dashed rounded-full shadow-2xl bg-gradient-to-tr from-yellow-500 to-yellow-400 shadow-yellow-400 "> -->
+
+        <div>
+          <h1 class="text-white text-x1">{{prioridad}}</h1>
+        </div>
+
+      </div>
+    </div>
+  </div>
+}
+
+
+
 
 @if(this.openModal){
-  <app-modal-update-card (closeModal)="this.openModal = $event" [data]="this.searchInfo" (reload)="$event? this.llega($event) : ''"></app-modal-update-card>
+  <app-modal-update-card (closeModal)="this.openModal = $event" [data]="this.searchInfo" (reload)="$event? this.update($event) : ''"></app-modal-update-card>
 }
 <!--
   <div class="max-w-sm gap-1 border border-red-500 rounded-lg shadow-lg">

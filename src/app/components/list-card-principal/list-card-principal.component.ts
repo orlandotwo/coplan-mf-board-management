@@ -7,6 +7,7 @@ import { ModalUpdateListComponent } from '../modal-update-list/modal-update-list
 
 import { BoardManagementService } from '../../services/board-management.service';
 import { ListModel } from '../../models/list';
+import { CardModel } from '../../models/card';
 
 
 
@@ -73,16 +74,36 @@ export class ListCardPrincipalComponent implements OnChanges{
   addCard(list: ListModel){
     console.log(list);
 
-    this.httpService.postCard(Number(list.id)).then(response => {
-      if (response) {
-        console.log('Listas:', response);
-        this.getList()
-      } else {
-        alert('Error al cargar las listas');
+    if(list.listCard){
+      console.log('Existe listCard')
+    }else{
+      console.log('No existe listCard')
+      const card:CardModel = {
+        id: 0,
+        nombre: '',
+        prioridad: 'Baja',
+        inicial: true
       }
-    }).catch(error => {
-      alert('Error al cargar las listas');
-    });
+      list.listCard = [card]
+
+      this.listLista = this.listLista.map(l => {
+        if(l.id === list.id){
+          l.listCard = list.listCard
+        }
+        return l
+      })
+    }
+
+    // this.httpService.postCard(Number(list.id)).then(response => {
+    //   if (response) {
+    //     console.log('Listas:', response);
+    //     this.getList()
+    //   } else {
+    //     alert('Error al cargar las listas');
+    //   }
+    // }).catch(error => {
+    //   alert('Error al cargar las listas');
+    // });
   }
   openModalUpdateList(list:any){
     this.listToDelete = list;

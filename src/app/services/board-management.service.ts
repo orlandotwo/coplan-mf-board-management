@@ -62,7 +62,8 @@ export class BoardManagementService {
     //   //console.log('Lista agregada:', response);
     // });
     const newCard = {
-      idLista: idList
+      idLista: idList,
+      nomCard: nomCard
     }
     return this.http.post('http://localhost:8081/coplan-api/card', newCard).toPromise()
       .then(response => {

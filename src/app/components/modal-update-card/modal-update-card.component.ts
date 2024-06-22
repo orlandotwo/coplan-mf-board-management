@@ -56,19 +56,19 @@ export class ModalUpdateCardComponent implements OnInit {
 
 
   updateCard(){
-    console.log(this.formCard)
+    //console.log(this.formCard)
 
     this.data.card.nombre = this.formCard.get('nombre')?.value;
     this.data.card.prioridad = this.formCard.get('prioridad')?.value;
     this.data.card.descripcion = this.formCard.get('descripcion')?.value;
 
-    console.log(this.data);
+    //console.log(this.data);
 
     this.httpService.putCard(this.data).then(response => {
       if (response) {
         this.cerrarModal(false);
         this.reload.emit(true);
-        console.log('Card Actualizada:', response);
+        //console.log('Card Actualizada:', response);
 
       } else {
         alert('Error al agregar la lista');
